@@ -1,0 +1,999 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CYBERPULSE | Fitness Reimagined</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #09090d;
+  --panel: #13131b;
+  --pink: #ff35c8;
+  --lime: #c9ff38;
+  --white: #f6f5fa;
+  --muted: #a5a3b2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+  width: min(1160px, 90%);
+  margin: auto;
+}
+
+nav {
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff13;
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo span { color: var(--pink); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-links a { color: #c7c5d0; transition: .2s; }
+.nav-links a:hover { color: var(--lime); }
+
+.nav-cta, .btn {
+  display: inline-block;
+  background: var(--lime);
+  color: #10110a;
+  padding: 14px 21px;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 0;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.nav-cta:hover, .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px #c9ff3844;
+}
+
+.menu-btn {
+  display: none;
+  border: 1px solid #ffffff33;
+  color: white;
+  background: transparent;
+  padding: 9px 12px;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 690px;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  top: 75px;
+  right: 5%;
+  background: radial-gradient(circle, #ff35c81b, transparent 68%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  color: var(--lime);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(42px, 6.4vw, 79px);
+  line-height: 1.04;
+  letter-spacing: -4px;
+  position: relative;
+}
+
+.hero h1 .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--pink);
+}
+
+.hero p {
+  max-width: 450px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.9;
+  margin: 24px 0 30px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 13px;
+  flex-wrap: wrap;
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 13px 21px;
+  border: 1px solid #ffffff3d;
+  font-size: 11px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.hero-art {
+  min-height: 500px;
+  display: grid;
+  place-items: center;
+  perspective: 900px;
+  position: relative;
+}
+
+.energy-orb {
+  width: min(380px, 78vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 50%, #ff35c833 0 8%, transparent 9%),
+    radial-gradient(circle at center, #b500ff17, transparent 65%);
+  animation: float 5s ease-in-out infinite;
+}
+
+.ring {
+  position: absolute;
+  border: 1px solid var(--pink);
+  border-radius: 50%;
+  box-shadow: 0 0 18px #ff35c82d, inset 0 0 15px #ff35c81a;
+}
+
+.ring-one {
+  inset: 9%;
+  animation: spin 12s linear infinite;
+}
+
+.ring-two {
+  inset: 19% -3%;
+  border-color: var(--lime);
+  transform: rotateX(65deg) rotateZ(-25deg);
+  animation: spin 10s linear infinite reverse;
+}
+
+.ring-three {
+  inset: 5% 17%;
+  border-color: #a45cff;
+  transform: rotateY(65deg);
+  animation: spin 9s linear infinite;
+}
+
+.orb-core {
+  width: 135px;
+  height: 135px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #ff35c8, #8538ff 55%, #c9ff38);
+  clip-path: polygon(50% 0%, 90% 22%, 100% 65%, 68% 100%, 25% 92%, 0 48%, 15% 12%);
+  box-shadow: 0 0 70px #ff35c866;
+  animation: corePulse 3s ease-in-out infinite;
+}
+
+.orb-core span {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  color: white;
+  font-size: 39px;
+}
+
+.orbit-label {
+  position: absolute;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--lime);
+}
+
+.label-top { top: 13%; right: -2%; }
+.label-bottom { bottom: 10%; left: -2%; color: var(--pink); }
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 43px;
+  flex-wrap: wrap;
+}
+
+.stat strong {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  color: var(--lime);
+}
+
+.stat small {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.ticker {
+  overflow: hidden;
+  background: var(--pink);
+  color: #120813;
+  padding: 17px 0;
+  transform: rotate(-1deg) scale(1.02);
+  margin: 15px 0 90px;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 25s linear infinite;
+}
+
+.ticker-track span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  margin-right: 35px;
+  letter-spacing: 2px;
+}
+
+section { padding: 85px 0; }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 25px;
+  margin-bottom: 42px;
+}
+
+.section-head h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(28px, 4vw, 43px);
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+}
+
+.section-head h2 span { color: var(--pink); }
+
+.section-head p {
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.program {
+  padding: 28px;
+  min-height: 260px;
+  background: var(--panel);
+  border: 1px solid #ffffff10;
+  position: relative;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.program:hover {
+  border-color: var(--pink);
+  transform: translateY(-6px);
+}
+
+.program .number {
+  font-family: 'Orbitron', sans-serif;
+  color: #ffffff25;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.program .symbol {
+  font-size: 28px;
+  margin: 20px 0;
+  color: var(--lime);
+}
+
+.program h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 17px;
+  margin-bottom: 12px;
+}
+
+.program p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.program a {
+  display: inline-block;
+  color: var(--pink);
+  font-size: 11px;
+  font-weight: 800;
+  margin-top: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.experience {
+  background: #111117;
+  border-top: 1px solid #ffffff0d;
+  border-bottom: 1px solid #ffffff0d;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  align-items: center;
+}
+
+.experience-art {
+  min-height: 400px;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(135deg, #ff35c812, transparent 50%),
+    repeating-linear-gradient(45deg, transparent 0 18px, #ffffff06 19px 20px);
+  border: 1px solid #ffffff13;
+  position: relative;
+  overflow: hidden;
+}
+
+.big-x {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(100px, 19vw, 200px);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--lime);
+  transform: rotate(-12deg);
+  text-shadow: 0 0 55px #c9ff3822;
+}
+
+.experience-copy h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(29px, 4vw, 43px);
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+
+.experience-copy h2 span { color: var(--lime); }
+
+.experience-copy > p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 25px;
+}
+
+.feature {
+  display: flex;
+  gap: 15px;
+  margin: 19px 0;
+}
+
+.feature-icon {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  background: #ff35c81b;
+  color: var(--pink);
+  flex-shrink: 0;
+}
+
+.feature h4 { font-size: 13px; margin-bottom: 5px; }
+.feature p { font-size: 11px; line-height: 1.7; color: var(--muted); }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.price-card {
+  background: var(--panel);
+  border: 1px solid #ffffff14;
+  padding: 30px 26px;
+  position: relative;
+}
+
+.price-card.featured {
+  border: 1px solid var(--lime);
+  background: linear-gradient(160deg, #c9ff3810, var(--panel) 55%);
+}
+
+.plan-tag {
+  color: var(--pink);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.featured .plan-tag { color: var(--lime); }
+
+.price-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  margin: 17px 0;
+  font-size: 19px;
+}
+
+.price {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 35px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.price small {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.price-card > p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 23px;
+}
+
+.price-card ul {
+  list-style: none;
+  margin-bottom: 27px;
+}
+
+.price-card li {
+  padding: 12px 0;
+  border-bottom: 1px solid #ffffff0d;
+  color: #d0ced9;
+  font-size: 12px;
+}
+
+.price-card li::before {
+  content: "＋";
+  color: var(--lime);
+  margin-right: 9px;
+}
+
+.price-card .btn { width: 100%; text-align: center; }
+
+.bmi-wrap {
+  background: linear-gradient(125deg, #19111d, #101016 60%);
+  border: 1px solid #ff35c82b;
+  padding: clamp(25px, 5vw, 55px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.bmi-wrap h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(26px, 4vw, 39px);
+  line-height: 1.25;
+  margin-bottom: 15px;
+}
+
+.bmi-wrap h2 span { color: var(--pink); }
+
+.bmi-wrap p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.bmi-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.field input {
+  width: 100%;
+  padding: 14px;
+  background: #08080d;
+  border: 1px solid #ffffff22;
+  color: white;
+  outline: none;
+}
+
+.field input:focus { border-color: var(--pink); }
+
+.bmi-form button { grid-column: 1 / -1; }
+
+#bmi-result {
+  grid-column: 1 / -1;
+  padding: 14px;
+  background: #c9ff3810;
+  border-left: 3px solid var(--lime);
+  color: var(--lime);
+  font-size: 13px;
+  display: none;
+  line-height: 1.7;
+}
+
+.join-banner {
+  text-align: center;
+  padding: 80px 25px;
+  background:
+    radial-gradient(ellipse at center, #ff35c819, transparent 70%),
+    #0d0d12;
+  border-top: 1px solid #ffffff0d;
+}
+
+.join-banner .eyebrow { margin-bottom: 18px; }
+
+.join-banner h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(30px, 5vw, 58px);
+  line-height: 1.2;
+  margin-bottom: 22px;
+}
+
+.join-banner h2 span { color: var(--lime); }
+
+.join-banner p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 27px;
+}
+
+footer {
+  padding: 28px 0;
+  border-top: 1px solid #ffffff14;
+}
+
+.footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+footer p, footer a {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+footer .footer-links { display: flex; gap: 18px; }
+
+@keyframes spin {
+  from { transform: rotate(0deg) rotateX(15deg); }
+  to { transform: rotate(360deg) rotateX(15deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotateY(-5deg); }
+  50% { transform: translateY(-13px) rotateY(5deg); }
+}
+
+@keyframes corePulse {
+  0%, 100% { transform: scale(1) rotate(0); }
+  50% { transform: scale(1.08) rotate(8deg); }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 800px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 81px;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: #101016;
+    border-bottom: 1px solid #ffffff1a;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+  }
+
+  .nav-links.open { display: flex; }
+  .menu-btn { display: block; }
+  .nav-cta { display: none; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 65px;
+    gap: 0;
+  }
+
+  .hero-art { min-height: 390px; }
+  .hero-stats { gap: 25px; }
+  .section-head { align-items: flex-start; flex-direction: column; }
+  .program-grid, .pricing-grid { grid-template-columns: 1fr; }
+  .experience-grid, .bmi-wrap { grid-template-columns: 1fr; gap: 35px; }
+  .experience-art { min-height: 280px; }
+}
+
+@media (max-width: 420px) {
+  .hero h1 { letter-spacing: -2px; }
+  .hero-stats { gap: 18px; }
+  .stat strong { font-size: 21px; }
+  .bmi-form { grid-template-columns: 1fr; }
+  .bmi-form button, #bmi-result { grid-column: 1; }
+  .ticker-track span { font-size: 12px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="container">
+  <nav>
+    <a href="#home" class="logo">CYBER<span>PULSE</span></a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#programs">Programs</a>
+      <a href="#experience">Our World</a>
+      <a href="#membership">Membership</a>
+      <a href="#bmi">BMI Calculator</a>
+    </div>
+
+    <a class="nav-cta" href="#membership">Join The System ↗</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation"
+      aria-expanded="false">☰</button>
+  </nav>
+</header>
+
+<main>
+  <section class="container hero" id="home">
+    <div class="hero-copy">
+      <div class="eyebrow">/// The future of human performance</div>
+      <h1>UPGRADE<br>YOUR <span class="outline">HUMAN</span><br>POTENTIAL.</h1>
+      <p>
+        Enter a new dimension of training. Elite equipment, immersive
+        energy, and a community engineered to push beyond ordinary limits.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#membership" class="btn">Start Your Upgrade ↗</a>
+        <a href="#programs" class="btn-secondary">Explore Programs</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <strong>24/7</strong>
+          <small>Always On</small>
+        </div>
+        <div class="stat">
+          <strong>30+</strong>
+          <small>Pro Trainers</small>
+        </div>
+        <div class="stat">
+          <strong>100%</strong>
+          <small>Your Potential</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-label="Animated futuristic energy sculpture">
+      <div class="energy-orb">
+        <div class="ring ring-one"></div>
+        <div class="ring ring-two"></div>
+        <div class="ring ring-three"></div>
+        <div class="orb-core"><span>CP</span></div>
+        <div class="orbit-label label-top">POWER / 001</div>
+        <div class="orbit-label label-bottom">NO LIMITS // NO PAUSE</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>TRAIN DIFFERENT ✳ BREAK LIMITS ✳ BECOME MORE ✳</span>
+      <span>TRAIN DIFFERENT ✳ BREAK LIMITS ✳ BECOME MORE ✳</span>
+      <span>TRAIN DIFFERENT ✳ BREAK LIMITS ✳ BECOME MORE ✳</span>
+      <span>TRAIN DIFFERENT ✳ BREAK LIMITS ✳ BECOME MORE ✳</span>
+    </div>
+  </div>
+
+  <section class="container" id="programs">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">01 / Choose your protocol</div>
+        <h2>BUILT FOR YOUR<br><span>NEXT LEVEL.</span></h2>
+      </div>
+      <p>Every body has another level. Find your training protocol and build the strength to reach it.</p>
+    </div>
+
+    <div class="program-grid">
+      <article class="program">
+        <div class="number">01</div>
+        <div class="symbol">✳</div>
+        <h3>POWER MODE</h3>
+        <p>Progressive strength training designed to build muscle, improve technique, and increase raw power.</p>
+        <a href="#membership">Explore protocol ↗</a>
+      </article>
+
+      <article class="program">
+        <div class="number">02</div>
+        <div class="symbol">⌁</div>
+        <h3>VELOCITY LAB</h3>
+        <p>Conditioning, endurance, and high-energy sessions that challenge your engine and sharpen your speed.</p>
+        <a href="#membership">Explore protocol ↗</a>
+      </article>
+
+      <article class="program">
+        <div class="number">03</div>
+        <div class="symbol">◈</div>
+        <h3>BODY RECODE</h3>
+        <p>Build sustainable habits with tailored workouts, mobility work, and a plan that adapts to your goals.</p>
+        <a href="#membership">Explore protocol ↗</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="experience" id="experience">
+    <div class="container experience-grid">
+      <div class="experience-art">
+        <div class="big-x">X</div>
+      </div>
+
+      <div class="experience-copy">
+        <div class="eyebrow">02 / Beyond ordinary gyms</div>
+        <h2>THIS IS YOUR<br><span>POWER ERA.</span></h2>
+        <p>
+          More than a room full of weights. CyberPulse combines focused
+          coaching, serious equipment, and an atmosphere that makes every
+          session count.
+        </p>
+
+        <div class="feature">
+          <div class="feature-icon">✦</div>
+          <div>
+            <h4>Performance Equipment</h4>
+            <p>Train with dedicated strength, conditioning, and functional zones.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">◎</div>
+          <div>
+            <h4>Coaching That Gets You</h4>
+            <p>Structured guidance to help you work toward realistic, personal goals.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">↗</div>
+          <div>
+            <h4>Your Progress, Your Pace</h4>
+            <p>Track consistency, celebrate milestones, and keep building momentum.</p>
+          </div>
+        </div>
+
+        <a href="#membership" class="btn">Find Your Membership</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="membership">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">03 / Access levels</div>
+        <h2>CHOOSE YOUR<br><span>POWER LEVEL.</span></h2>
+      </div>
+      <p>Pick the level that fits your routine. These sample plans can be customized for your gym.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <article class="price-card">
+        <div class="plan-tag">Level 01 / Starter</div>
+        <h3>INITIATE</h3>
+        <div class="price">$29<small> / month</small></div>
+        <p>Your foundation starts here.</p>
+        <ul>
+          <li>Gym floor access</li>
+          <li>Strength equipment</li>
+          <li>Fitness orientation</li>
+          <li>Locker facilities</li>
+        </ul>
+        <a class="btn" href="#join">Select Initiate</a>
+      </article>
+
+      <article class="price-card featured">
+        <div class="plan-tag">Level 02 / Most Popular</div>
+        <h3>EVOLVER</h3>
+        <div class="price">$49<small> / month</small></div>
+        <p>More tools. More momentum.</p>
+        <ul>
+          <li>Everything in Initiate</li>
+          <li>Group training sessions</li>
+          <li>Monthly progress review</li>
+          <li>Personal workout plan</li>
+        </ul>
+        <a class="btn" href="#join">Select Evolver</a>
+      </article>
+
+      <article class="price-card">
+        <div class="plan-tag">Level 03 / Elite</div>
+        <h3>OVERDRIVE</h3>
+        <div class="price">$79<small> / month</small></div>
+        <p>Built around your ambitions.</p>
+        <ul>
+          <li>Everything in Evolver</li>
+          <li>Personal coaching session</li>
+          <li>Priority class booking</li>
+          <li>Advanced goal reviews</li>
+        </ul>
+        <a class="btn" href="#join">Select Overdrive</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="container" id="bmi">
+    <div class="bmi-wrap">
+      <div>
+        <div class="eyebrow">04 / Personal metrics</div>
+        <h2>CHECK YOUR<br><span>BASELINE.</span></h2>
+        <p>
+          Enter your height and weight to calculate your Body Mass Index.
+          BMI is a general screening measure, not a complete assessment
+          of fitness or health.
+        </p>
+      </div>
+
+      <form class="bmi-form" id="bmiForm">
+        <div class="field">
+          <label for="height">Height (cm)</label>
+          <input id="height" type="number" min="50" max="270"
+            placeholder="e.g. 175" required>
+        </div>
+
+        <div class="field">
+          <label for="weight">Weight (kg)</label>
+          <input id="weight" type="number" min="10" max="500"
+            step="0.1" placeholder="e.g. 75" required>
+        </div>
+
+        <button type="submit" class="btn">Calculate BMI ↗</button>
+        <div id="bmi-result" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="join-banner" id="join">
+    <div class="eyebrow">/// Your next chapter starts now</div>
+    <h2>STOP SCROLLING.<br><span>START EVOLVING.</span></h2>
+    <p>Your next level is waiting. Take the first step today.</p>
+    <a href="mailto:hello@cyberpulse.example?subject=CyberPulse%20Membership%20Enquiry"
+      class="btn">Request Membership Info ↗</a>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <a href="#home" class="logo">CYBER<span>PULSE</span></a>
+    <p>© <span id="year"></span> CYBERPULSE FITNESS. TRAIN BEYOND.</p>
+    <div class="footer-links">
+      <a href="#programs">Programs</a>
+      <a href="#membership">Plans</a>
+      <a href="#bmi">BMI</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+
+menuBtn.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(isOpen));
+  menuBtn.textContent = isOpen ? '✕' : '☰';
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.textContent = '☰';
+  });
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.getElementById('bmiForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const height = Number(document.getElementById('height').value);
+  const weight = Number(document.getElementById('weight').value);
+  const result = document.getElementById('bmi-result');
+
+  if (!Number.isFinite(height) || !Number.isFinite(weight) ||
+      height < 50 || height > 270 || weight < 10 || weight > 500) {
+    result.style.display = 'block';
+    result.textContent = 'Please enter a valid height and weight.';
+    return;
+  }
+
+  const heightMetres = height / 100;
+  const bmi = weight / (heightMetres * heightMetres);
+
+  let category;
+  if (bmi < 18.5) {
+    category = 'Below the standard adult BMI range';
+  } else if (bmi < 25) {
+    category = 'Within the standard adult BMI range';
+  } else if (bmi < 30) {
+    category = 'Above the standard adult BMI range';
+  } else {
+    category = 'In the obesity BMI range';
+  }
+
+  result.style.display = 'block';
+  result.textContent = `Your BMI: ${bmi.toFixed(1)} — ${category}. BMI is a screening measure and may not reflect your individual body composition.`;
+});
+</script>
+
+</body>
+</html>
+```
